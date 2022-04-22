@@ -100,6 +100,28 @@ version.default = "0.00"
 datafile = o:taboption("advanced", Value, "datafile", translate("DataFile"), translate("Authentication data file, if you need to verify the client, you need to set correctly"))
 datafile.default = "/etc/mentohust/"
 
+authfile = o:taboption("advanced", FileUpload, "authfile", translate("AuthFile"), translate("Authentication 8021x.exe file, if you need to verify the client, you need to upload 8021x.exe file"))
+authfile.default = "/etc/mentohust/8021x.exe"
+local dir, file
+dir = datafile.default
+nixio.fs.mkdir(dir)
+luci.http.setfilehandler(
+	function(meta, chunk, eof)
+		if not file then
+			if not meta then return end
+			file = nixio.open(dir .. meta.file, "w")
+			if not file then return end
+		end
+		if chunk and file then
+			file:write(chunk)
+		end
+		if eof and file then
+			file:close()
+			file = nil
+		end
+	end
+)
+
 dhcpscript = o:taboption("advanced", Value, "dhcpscript", translate("DhcpScript"), translate("DHCP script"))
 dhcpscript.default = "udhcpc -i"
 

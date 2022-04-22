@@ -121,6 +121,12 @@ msgstr "数据文件"
 msgid "Authentication data file, if you need to verify the client, you need to set correctly"
 msgstr "认证数据文件，如果需要校验客户端，就需要正确设置"
 
+msgid "AuthFile"
+msgstr "认证文件"
+
+msgid "Authentication 8021x.exe file, if you need to verify the client, you need to upload 8021x.exe file"
+msgstr "8021x.exe认证文件，如果需要校验客户端，就需要上传8021x.exe文件"
+
 msgid "DhcpScript"
 msgstr "DHCP的脚本"
 
